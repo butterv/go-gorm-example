@@ -8,6 +8,8 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
+const RecordCount = 100
+
 func main() {
 	db, err := gorm.Open("postgres", "host=localhost port=5432 user=dev dbname=postgres password=pass sslmode=disable")
 	if err != nil {
@@ -49,7 +51,7 @@ func migrate(db *gorm.DB) {
 }
 
 func insert(db *gorm.DB) {
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= RecordCount; i++ {
 		u := User{
 			Name: fmt.Sprintf("gorm_test_user_%03d", i),
 		}
@@ -59,7 +61,7 @@ func insert(db *gorm.DB) {
 }
 
 func selectAndUpdate(db *gorm.DB) {
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= RecordCount; i++ {
 		var u User
 		// データを取得
 		if result := db.First(&u, "id = ?", i); result.Error != nil {
@@ -76,7 +78,7 @@ func selectAndUpdate(db *gorm.DB) {
 }
 
 func selectAndDelete(db *gorm.DB) {
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= RecordCount; i++ {
 		var u User
 		// データを取得
 		if result := db.First(&u, "id = ?", i); result.Error != nil {
