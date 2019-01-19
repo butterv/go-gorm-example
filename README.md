@@ -1,1 +1,1 @@
-# gorm-example
+# go-gorm-example
